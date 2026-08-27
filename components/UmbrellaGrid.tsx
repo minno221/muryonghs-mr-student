@@ -51,7 +51,7 @@ export default function UmbrellaGrid(){
       {message && <div className="mb-4 p-3 bg-blue-50 text-blue-800 rounded">{message}</div>}
       <div className="grid grid-cols-4 gap-4">
         {data.umbrellas.map((u:any)=> (
-          <div key={u.id} className={`p-4 rounded shadow ${u.status==='AVAILABLE'? 'bg-white':'u.status==\'INSPECTION\' ? \"bg-gray-100\" : \"bg-yellow-50\"`}`}>
+        <div key={u.id} className={`p-4 rounded shadow ${u.status === 'AVAILABLE' ? 'bg-white' : u.status === 'INSPECTION' ? 'bg-gray-100' : 'bg-yellow-50'}`}>
             <div className="font-medium">{u.code}</div>
             <div className="text-sm text-gray-500">상태: {u.status}</div>
             <div className="mt-2">
