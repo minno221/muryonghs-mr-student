@@ -1,0 +1,51 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+enum UmbrellaStatus {
+  AVAILABLE
+  IN_USE
+  INSPECTION
+}
+
+enum ReservationStatus {
+  INPUTTING
+  CONFIRMED
+  CANCELLED
+  EXPIRED
+  RETURNED
+}
+
+model Umbrella {
+  id        Int         @id @default(autoincrement())
+  code      String      @unique
+  status    UmbrellaStatus @default(AVAILABLE)
+  location  String?
+  createdAt DateTime    @default(now())
+  reservations Reservation[]
+}
+
+model Reservation {
+  id          Int               @id @default(autoincrement())
+  umbrellaId  Int
+  umbrella    Umbrella          @relation(fields: [umbrellaId], references: [id])
+  studentId   String?
+  name        String?
+  phone       String?
+  status      ReservationStatus @default(INPUTTING)
+  token       String            @unique
+  createdAt   DateTime          @default(now())
+  holdUntil   DateTime?
+  confirmedAt DateTime?
+  returnedAt  DateTime?
+}
+
+model Setting {
+  key   String @id
+  value String
+}
