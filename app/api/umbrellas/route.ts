@@ -11,6 +11,6 @@ export async function GET(){
   const eventActive = setting?.value === 'true'
 
   const umbrellas = await prisma.umbrella.findMany({orderBy:{id:'asc'}, include:{reservations:{where:{status:{in:['INPUTTING','CONFIRMED']}}}}})
-  const mapped = umbrellas.map(u=>({id:u.id, code:u.code, status:u.status, activeReservations: u.reservations}))
+  const mapped = umbrellas.map((u:any)=>({id:u.id, code:u.code, status:u.status, activeReservations: u.reservations}))
   return NextResponse.json({eventActive, umbrellas:mapped})
 }
