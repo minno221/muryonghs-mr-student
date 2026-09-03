@@ -24,7 +24,7 @@ model Reservation {
   studentId   String?
   name        String?
   phone       String?
-  status      ReservationStatus @default(INPUTTING)
+  status      String @default("INPUTTING")
   token       String            @unique
   createdAt   DateTime          @default(now())
   holdUntil   DateTime?
