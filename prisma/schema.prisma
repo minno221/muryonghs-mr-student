@@ -7,24 +7,11 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-enum UmbrellaStatus {
-  AVAILABLE
-  IN_USE
-  INSPECTION
-}
-
-enum ReservationStatus {
-  INPUTTING
-  CONFIRMED
-  CANCELLED
-  EXPIRED
-  RETURNED
-}
 
 model Umbrella {
   id        Int         @id @default(autoincrement())
   code      String      @unique
-  status    UmbrellaStatus @default(AVAILABLE)
+  status    String @default("AVAILABLE")
   location  String?
   createdAt DateTime    @default(now())
   reservations Reservation[]
